@@ -12,17 +12,17 @@ The solution addresses **Two Sum** using an **Iterative Traversal / Direct Simul
 
 ### Key Highlights:
 - **Primary Pattern:** Iterative Traversal / Direct Simulation
-- **Data Structures Used:** Primitive Variables / Arrays
+- **Data Structures Used:** Hash Table / Map / Set
 - **Programming Language:** java
 
 ## 🛠️ Step-by-Step Algorithm Walkthrough
-1. **Input Processing:** Read and sanitize input parameters.
-2. **Sequential Traversal:** Iterate through elements to execute target transformation or calculation.
-3. **Final Result:** Construct and return expected output value.
+1. **Initialize Hash Container:** Instantiate a hash table or set to achieve fast $O(1)$ lookups.
+2. **Single Pass Traversal:** Iterate through the elements while querying or recording state in the map.
+3. **Instant Lookup:** Check complement/frequency in constant time to determine matching answers.
 
 ## ⏱️ Complexity Analysis
-- **Time Complexity:** $\mathcal{O(N²)}$ — Contains nested loops iterating over the input collection.
-- **Space Complexity:** $\mathcal{O(1)}$ — Only constant auxiliary memory is used for variables.
+- **Time Complexity:** $\mathcal{O(N)}$ — Single loop or linear traversal over the input elements.
+- **Space Complexity:** $\mathcal{O(N)}$ — Uses auxiliary data structure (Map/Set/Queue/Heap) storing up to N elements.
 
 ---
 
@@ -31,13 +31,13 @@ The solution addresses **Two Sum** using an **Iterative Traversal / Direct Simul
 ```java
 class Solution {
     public int[] twoSum(int[] nums, int target) {
-        int n = nums.length;
-        for(int i =0 ; i<n ;i++){
-            for(int j=i+1; j<n ; j++){
-                if (nums[i]+nums[j] == target){
-                    return new int[]{i,j};
-                }
+        HashMap<Integer,Integer> index = new HashMap<>();
+        for(int i = 0 ; i<nums.length ; i ++){
+            int diff = target - nums[i];
+            if(index.containsKey(diff)){
+                return new int[]{i,index.get(diff)};
             }
+            index.put(nums[i],i);
         }
 
         return new int[]{};
