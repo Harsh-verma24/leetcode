@@ -1,16 +1,14 @@
 class Solution {
     public boolean checkDivisibility(int n) {
-        int dup =n ;
+        int original =n ;
         int digitSum = 0;
         int digitProduct = 1;
-        while(dup>0){
-            int lastDigit = dup%10;
-            digitSum = lastDigit + digitSum;
-            digitProduct = lastDigit * digitProduct;
-            dup=dup/10;
+        while(n >0){
+            int lastDigit = n%10;
+            n = n/10;
+            digitSum += lastDigit;
+            digitProduct *= lastDigit ;
         }
-        int divisor = digitSum + digitProduct;
-
-        return divisor % n == 0;
+        return original % (digitSum + digitProduct) == 0;
     }
 }
